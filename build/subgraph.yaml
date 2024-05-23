@@ -1,0 +1,40 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Contract
+    network: sepolia
+    source:
+      address: "0x64D8506e96788aF3eb8110FEa4222E6eA8114Db9"
+      abi: Contract
+      startBlock: 5900645
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Upgraded
+      abis:
+        - name: Contract
+          file: Contract/abis/Contract.json
+      eventHandlers:
+        - event: Initialized(uint64)
+          handler: handleInitialized
+        - event: MemberApproved(indexed address)
+          handler: handleMemberApproved
+        - event: MemberRegistered(indexed address,string)
+          handler: handleMemberRegistered
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: ProposalCanceled(indexed uint256)
+          handler: handleProposalCanceled
+        - event: ProposalCreated(indexed uint256,indexed uint8,bytes)
+          handler: handleProposalCreated
+        - event: ProposalExecuted(indexed uint256)
+          handler: handleProposalExecuted
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: Contract/Contract.wasm
